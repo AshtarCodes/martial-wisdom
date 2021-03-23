@@ -1,0 +1,12 @@
+{
+  "name": "fs-app",
+  "version": "1.0.0",
+  "description": "a full-stack quote generator using Node, Express, and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "'Ashtar Paniagua'",
+  "license": "ISC"
+}
