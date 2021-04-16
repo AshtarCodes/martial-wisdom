@@ -54,9 +54,6 @@ app.get('/', (req, res) => {
             $set: {
                 likes: req.body.likes + 1                
             }
-        },{
-            sort: {_id: -1},
-            upsert: false
         })
         .then(result => {
             console.log('Added one like')

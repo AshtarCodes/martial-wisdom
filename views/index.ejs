@@ -17,7 +17,8 @@
     </form>
     <h2 class="quote-of-the-day">Quote of the Day:</h2>
     <ul class="each-quote">
-        <li><span class="quote-text"><%= quotes[randomIndex].quote %></span><span class="quote-name"><%=quotes[randomIndex].name %></span></li>
+        <li><span class="quote-text"><%= quotes[randomIndex].quote %></span></li>
+        <li><span class="quote-name"><%=quotes[randomIndex].name %></span></li>
         <li><span class="fas fa-thumbs-up quote-likes"><%=quotes[randomIndex].likes%></span></li>
         <li><button class="delete" id='delete'>Delete</button></li>
     </ul>

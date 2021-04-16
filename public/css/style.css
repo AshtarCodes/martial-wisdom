@@ -1,0 +1,12 @@
+li {
+    list-style-type: none;
+}
+.each-quote {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+.quote-likes {
+    /* padding: 2em; */
+}
