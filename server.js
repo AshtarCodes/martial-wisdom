@@ -50,17 +50,28 @@ app.get('/', (req, res) => {
     })
 
     app.put('/addOneLike', (req, res) => {
-        db.collection('quotes').insertOne({name: req.body.name, quote: req.body.quote, likes: req.body.likes}, {
+        db.collection('quotes').updateOne({name: req.body.name, quote: req.body.quote, likes: req.body.likes}, {
             $set: {
-                likes: (Number(req.body.likes) || 0) + 1,
-                upsert: true
+                likes: req.body.likes + 1                
             }
+        },{
+            sort: {_id: -1},
+            upsert: false
         })
         .then(result => {
             console.log('Added one like')
             res.json('Like added')
         }) 
         .catch( err => console.error(err))
+    })
+
+    app.delete('/deleteQuote', (req, res) => {
+        db.collection('quotes').deleteOne({name: req.body.name, quote: req.body.quote, likes: req.body.likes})
+        .then( result => {
+            console.log('Quote deleted');
+            res.json('Quote deleted')
+        })
+        .catch(err => console.error(err))
     })
     
 
