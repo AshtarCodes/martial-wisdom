@@ -15,8 +15,8 @@
         <input type="text" placeholder="quote" name="quote">
         <button type="submit">Submit</button>
     </form>
-    <h2 class="quote-of-the-day">Quote of the Day:</h2>
-    <ul class="each-quote">
+    <h2 class="quote-of-the-day">A quote for you:</h2>
+    <ul class="each-quote" data-id='<%= quotes[randomIndex]._id %>'>
         <li><span class="quote-text"><%= quotes[randomIndex].quote %></span></li>
         <li><span class="quote-name"><%=quotes[randomIndex].name %></span></li>
         <li><span class="fas fa-thumbs-up quote-likes"><%=quotes[randomIndex].likes%></span></li>

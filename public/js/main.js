@@ -5,15 +5,15 @@ const quoteAuthor = document.querySelector('.quote-name');
 const quoteText = document.querySelector('.quote-text');
 const quoteLikes = document.querySelector('.quote-likes');
 
+
 async function addLikes() {
+    const quoteId = this.parentElement.parentElement.dataset.id
     try {
         const response = await fetch('addOneLike', {
-            method: 'PUT',
+            method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                name: quoteAuthor,
-                quote: quoteText,
-                likes: quoteLikes
+                'quoteId': quoteId
             })            
         })
         const data = await response.json()
@@ -25,14 +25,14 @@ async function addLikes() {
 }
 
 async function deleteQuote () {
+    const deleteBtn = document.querySelector('#delete')
+    const quoteId = this.parentElement.parentElement.dataset.id
     try{
         const response = await fetch('/deleteQuote', {
-            method: 'DELETE',
+            method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                name: quoteAuthor,
-                quote: quoteText,
-                likes: quoteLikes
+                'quoteId': quoteId
             })    
         })
         const data = await response.json()

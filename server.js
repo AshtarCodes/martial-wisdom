@@ -1,7 +1,8 @@
 const express = require('express')
 const ejs = require('ejs')
 const app = express();
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
+const { ObjectId } = require('bson');
 const PORT = process.env.PORT || 4444;
 require('dotenv').config()
 
@@ -50,9 +51,11 @@ app.get('/', (req, res) => {
     })
 
     app.put('/addOneLike', (req, res) => {
-        db.collection('quotes').updateOne({name: req.body.name, quote: req.body.quote, likes: req.body.likes}, {
-            $set: {
-                likes: req.body.likes + 1                
+        let id = req.body.quoteId
+        let o_id = new ObjectId(id)
+        db.collection('quotes').findOneAndUpdate({'_id': o_id}, {
+            $inc: {
+                'likes': 1              
             }
         })
         .then(result => {
@@ -63,10 +66,12 @@ app.get('/', (req, res) => {
     })
 
     app.delete('/deleteQuote', (req, res) => {
-        db.collection('quotes').deleteOne({name: req.body.name, quote: req.body.quote, likes: req.body.likes})
+        let id = req.body.quoteId
+        let o_id = new ObjectId(id)
+        db.collection('quotes').findOneAndDelete({'_id': o_id})
         .then( result => {
             console.log('Quote deleted');
-            res.json('Quote deleted')
+            res.json('Deleted 1 quote')
         })
         .catch(err => console.error(err))
     })
