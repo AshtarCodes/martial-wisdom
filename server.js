@@ -1,21 +1,14 @@
 const express = require('express')
 const ejs = require('ejs')
 const app = express();
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose')
 const { ObjectId } = require('bson');
-const PORT = process.env.PORT || 4444;
-require('dotenv').config()
+const connectDB = require('./config/db')
 
-let db,
-    DB_URI = process.env.DB_STRING
 
-MongoClient.connect(DB_URI, {useUnifiedTopology: true})
-    .then(client => {
-        console.log('Connected to database');
-        //create or specify a database
-        db = client.db('wushu-wisdom') 
-    })
-    .catch (err => console.log(err))
+require('dotenv').config({path: './config/config.env'})
+
+connectDB()
 
 //set EJS templating
 app.set('view engine', 'ejs')
@@ -77,8 +70,8 @@ app.get('/', (req, res) => {
     })
     
 
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on ${process.env.PORT}`)
 })
 
 
